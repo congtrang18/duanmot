@@ -9,7 +9,7 @@ function tongspchitiet(){
 }
 function tongsldh(){
    
-    $sql=" SELECT SUM(soluong) AS 'tongdh' FROM `chitietdonhang`";
+    $sql=" SELECT SUM(soluongchitiet) AS 'tongdh' FROM `chitietdonhang`";
     return pdo_query($sql);
     // SELECT COUNT(*) AS 'tongdh' FROM `donhang`
 
@@ -20,11 +20,11 @@ function thanhtien(){
 }
 function sanphambanchay(){
     $sql="SELECT * FROM `chitietdonhang` JOIN sanphamct ON sanphamct.id_spct=chitietdonhang.idspct JOIN san_pham ON san_pham.id_sp=sanphamct.idsp 
-    ORDER BY chitietdonhang.soluong DESC LIMIT 10;";
+    ORDER BY chitietdonhang.soluongchitiet DESC LIMIT 10;";
     return pdo_query($sql);
 }
 function tongdh(){
-    $sql="SELECT khachhang.*,donhang.*,sanphamct.*,chitietdonhang.soluong AS 'sl',chitietdonhang.tongtien  
+    $sql="SELECT khachhang.*,donhang.*,sanphamct.*,chitietdonhang.soluongchitiet AS 'sl',chitietdonhang.tongtien  
     FROM `khachhang` JOIN donhang ON donhang.idkh=khachhang.id_kh 
     JOIN chitietdonhang ON chitietdonhang.iddh=donhang.id_dh JOIN sanphamct ON sanphamct.id_spct=chitietdonhang.idspct;";
     // thanhtien();
@@ -36,7 +36,7 @@ function thongkesp(){
      return pdo_query($sql);
 }
 function thongkedoanhthu(){
-    $sql="SELECT khachhang.*,donhang.*,sanphamct.*,chitietdonhang.soluong AS 'sl',chitietdonhang.tongtien  
+    $sql="SELECT khachhang.*,donhang.*,sanphamct.*,chitietdonhang.soluongchitiet AS 'sl',chitietdonhang.tongtien  
     FROM `khachhang` JOIN donhang ON donhang.idkh=khachhang.id_kh JOIN chitietdonhang ON chitietdonhang.iddh=donhang.id_dh JOIN sanphamct ON sanphamct.id_spct=chitietdonhang.idspct;";
     // thanhtien();
     return pdo_query($sql);

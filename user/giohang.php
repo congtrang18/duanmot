@@ -1,13 +1,12 @@
 <body>
-
-    <div class="cart-main">
+    <div class="cart-main ">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="cart-table table-responsive">
                         <table class="table table-bordered">
                             <thead>
-                                <tr class="title">
+                                <tr class="title">  
                                     <th class="pro-img">Sản phẩm</th>
                                     <th class="pro-name">Tên sản phẩm</th>
                                     <th class="pro-quantity">Số lượng</th>
@@ -39,7 +38,7 @@
 
                             </div>
                             <div class="cart-update">
-                               <a href="checkout.html"> <button type="button" class="btn btn-secondary">Đặt hàng</button></a>
+                               <a href="?act=muahang"> <button type="button" class="btn btn-secondary">Đặt hàng</button></a>
                             </div>
                         </div>
                     </div>

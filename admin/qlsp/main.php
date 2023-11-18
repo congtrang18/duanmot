@@ -44,7 +44,7 @@
                                     <td><?= $key + 1 ?></td>
                                     <td><?= $list['id_sp'] ?></td>
                                     <td><?= $list['tensp'] ?></td>
-                                    <td><img src="<?= $list['hinhanh'] ?>" alt="" width="100px;"></td>
+                                    <td><img src="<?= $list['hinhanh'] ?>" alt="" width="100px"></td>
 
                                     <td><?= $list['dacbiet'] ?></td>
                                     <td><?= $list['ten_gt'] ?></td>

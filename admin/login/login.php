@@ -3,7 +3,7 @@ session_start();
 include('../../model/pdo.php');
 include('../../model/login.php');
 $nv = nhanvien();
-$admin = admin();
+
 // var_dump($admin);
 ?>
 <!DOCTYPE html>
@@ -80,27 +80,22 @@ $admin = admin();
 </html>
 <?php
 if (isset($_POST['btnsubmit'])) {
-      // echo $_POST['user'];
+    foreach ($nv as $key => $value) {
 
-  foreach ($nv as $key => $value) {
+      if ($_POST['user'] == $value['tendangnhap'] && $_POST['pass'] == $value['matkhau']) {
 
-    if ($_POST['user'] == $value['tendangnhap'] && $_POST['pass'] == $value['matkhau']) {
-      $_SESSION['user'] = $_POST['user'];
+        $_SESSION['user'] = $_POST['user'];
+        header('location:../?act=bangdieukhien');
+       
+      }
+      // if ($_POST['user'] == $value['tendn'] && $_POST['pass'] == $value['mk']) {
 
-      header('location:../?act=bangdieukhien');
-      // break;
+      //   $_SESSION['ceo'] = $_POST['user'];
+      //   header('location:../?act=bangdieukhien');
+       
+      // }
     }
-  }
-//   foreach ($admin as $key => $value) {
-//     // echo $_POST['user'];
-// var_dump($value);
-//     if ($_POST['user'] === $value['tendn'] && $_POST['pass'] == $value['mk']) {
-//       // echo 1;
-//       $_SESSION['ceo'] = $_POST['user'];
-//       header('location:../?act=bangdieukhien');
-//       // break;
-//     }
-//   }
+  
 }
 if (isset($_SESSION['mknv']) || isset($_SESSION['mkceo'])) {
   // echo 1;

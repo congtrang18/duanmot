@@ -56,14 +56,7 @@
               <label class="control-label">Lương</label>
               <input class="form-control" type="text" name="luong" >
             </div>
-            <div class="form-group  col-md-4">
-              <label for="exampleSelect1" class="control-label">ID SEO</label>
-              <select class="form-control" id="exampleSelect1" name="id_ceo">
-                <?php foreach ($ceo as $item) : ?>
-                  <option value="<?php echo $item['id_ceo'] ?>"><?php echo $item['hoten'] ?></option>
-                <?php endforeach ?>
-              </select>
-            </div>
+            
             <div class="form-group  col-md-8">
             <button class="btn btn-save mr-3" name="btn" type="submit">Lưu lại</button>
             <a class="btn btn-cancel" href="?act=quanlynhanvien">Hủy bỏ</a>

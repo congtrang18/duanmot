@@ -3,8 +3,8 @@ function listdm(){
     $sql="SELECT*FROM danh_muc";
     return pdo_query($sql);
 }
-function adddm($tendm){
-$sql="INSERT INTO `danh_muc`( `tendm`) VALUES ('$tendm')";
+function adddm($tendm,$hinhanhdm){
+$sql="INSERT INTO `danh_muc`( `tendm`,hinhanhdm) VALUES ('$tendm','$hinhanhdm')";
 pdo_execute($sql);
 }
 function deletedm($iddm){

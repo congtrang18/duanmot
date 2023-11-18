@@ -44,7 +44,7 @@
                   <td><?php echo $item['id_nv'] ?></td>
                   <td><?php echo $item['hoten'] ?></td>
                   <td><?php echo date('d-m-Y', strtotime($item['ngaysinh'] )) ?></td>
-                  <td><img style="width: 75px;" src="<?php echo $item['hinh_anhnv'] ?>" alt=""></td>
+                  <td><img style="width: 75px;" src="<?php echo $item['hinhanhnv'] ?>" alt=""></td>
                   <td><?php echo $item['tendangnhap'] ?></td>
                   <td><?php echo $item['email'] ?></td>
                   <td><?php echo $item['sdt'] ?></td>
@@ -52,8 +52,8 @@
                   <td><?php echo $item['vaitro'] ?> </td>
                   <td><?php echo number_format($item['luong']) ?> </td>  
                   <td class="table-td-center">
-                   <a class="delete" idnv="<?php echo $item['id_nv'] ?>"> <button class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i></a>
-                    </button>
+                   <a class="delete" id="<?php echo $item['id_nv'] ?>"> <button class="btn btn-primary" type="button"><i class="fas fa-trash-alt"></i> </button></a>
+                   
                     <a href="?act=modalnv&id_nv=<?php echo $item['id_nv'];?>"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa"><i class="fas fa-edit"></i>
                     </button></a>
                   </td>
@@ -67,11 +67,10 @@
   </div>
   <script>
     var btnDelete = document.querySelectorAll(".delete");
-    console.log(btnDelete);
     btnDelete.forEach(function(item) {
       item.addEventListener('click', function(){
-        let x = item.getAttribute('idnv');
-        let check = confirm("Bạn có muốn xóa nhân viên này?");
+        let x = item.getAttribute('id');
+        let check = confirm("Bạn chắc chắn muốn xóa");
         if(check) {
           let href = item.setAttribute('href', '?act=deletenv&id_nv=' +x);
         }

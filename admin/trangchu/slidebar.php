@@ -21,10 +21,10 @@
             <li><a class="app-menu__item" href="?act=quanlydonhang"><i class='app-menu__icon bx bx-task'></i><span class="app-menu__label">Quản lý đơn hàng</span></a></li>
 
 
-            <?php if (!isset($_SESSION['ceo'])) { ?>
-                  <li><a class="app-menu__item" href="?act=baocaodoanhthu"><i class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Báo cáo doanh thu</span></a>
-                  </li>
-            <?php } ?>
+
+            <li><a class="app-menu__item" href="?act=baocaodoanhthu"><i class='app-menu__icon bx bx-pie-chart-alt-2'></i><span class="app-menu__label">Báo cáo doanh thu</span></a>
+            </li>
+
 
 
       </ul>

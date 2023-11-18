@@ -1,6 +1,7 @@
 <body>
     <!-- Login 1 - Bootstrap Brain Component -->
-    <div class="bg-light py-3 py-md-5 py-xl-8">
+  <div class="quenmk">
+  <div class="bg-light py-3 py-md-5 py-xl-8">
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-12 col-md-11 col-lg-8 col-xl-7 col-xxl-6">
@@ -14,10 +15,10 @@
                                 </div>
                             </div>
                         </div>
-                        <form action="#!">
+                        <form action="" method="post">
                             <div class="row gy-3 gy-md-4 overflow-hidden">
                                 <div class="col-12">
-                                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+                                    <label for="email" name="email" class="form-label">Email <span class="text-danger">*</span></label>
                                     <div class="input-group">
                                         <span class="input-group-text">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
@@ -29,9 +30,17 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="d-grid">
-                                        <button class="btn btn-dark btn-lg" type="submit">Gửi email</button>
+                                        <button class="btn btn-dark btn-lg" name="btnsubmit" type="submit">Gửi email</button>
                                     </div>
                                 </div>
+                                <?php if (isset($_POST['btnsubmit'])) {
+                                        $quenmk=quenmk($_POST['email']);
+                                        if ($quenmk) {
+                                          echo '<span style="color:red">Mật khẩu của bạn là:'.$quenmk["matkhau"].'</span>';
+                                        }else{
+                                            echo "<span  style='color:red'>email bạn nhập không đúng</span>";
+                                        }
+                                } ?>
                         </form>
                         <div class="row">
                             <div class="col-12">
@@ -47,4 +56,5 @@
             </div>
         </div>
     </div>
+  </div>
 </body>

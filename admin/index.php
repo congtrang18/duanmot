@@ -1,8 +1,7 @@
 
 <?php
-
 session_start();
-if (!isset($_SESSION['user']) || !isset($_SESSION['ceo'])) {
+if (!isset($_SESSION['user'])) {
 
    header('location:login/login.php');
 } else {
@@ -46,7 +45,9 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['ceo'])) {
          case 'adddm':
             // adddm();
             if (isset($_POST['btnsubmit'])) {
-               adddm($_POST['tendm']);
+               $upload_img="upload_img/".time().$_FILES['hinhanhdm']['name'];
+               move_uploaded_file($_FILES['hinhanhdm']['tmp_name'],$upload_img);
+               adddm($_POST['tendm'],$upload_img);
                header('location:?act=quanlydanhmuc');
             }
             include('qldm/adddm.php');
@@ -72,7 +73,7 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['ceo'])) {
          case 'quanlysanpham':
             $listsp = listsp();
 
-            var_dump($listsp);
+        
 
             include('qlsp/main.php');
             include('qlsp/modal.php');
@@ -245,10 +246,6 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['ceo'])) {
             if (isset($_SESSION['user'])) {
                unset($_SESSION['user']);
             }
-            if (isset($_SESSION['ceo'])) {
-               unset($_SESSION['ceo']);
-            }
-
             header('location:../admin/login/login.php');
 
             break;
@@ -258,13 +255,13 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['ceo'])) {
             include('qlnv/main.php');
             break;
          case 'addnv':
-            $ceo = ceo();
+            // $ceo = ceo();
             if (isset($_POST['btn'])) {
                $hoten = $_POST['hoten'];
                $tendangnhap = $_POST['tendangnhap'];
                $ngaysinh = $_POST['ngaysinh'];
 
-               $target_dir = "../upload-img/";
+               $target_dir = "upload_img/";
                $image = $_FILES['hinhanhnv']['name'];
                $random = rand(1, 100000);
                $target_file = $target_dir . $random . $image;
@@ -276,9 +273,9 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['ceo'])) {
                $diachi = $_POST['diachi'];
                $vaitro = $_POST['vaitro'];
                $luong = $_POST['luong'];
-               $id_ceo = $_POST['id_ceo'];
+          
 
-               addnv($hoten, $tendangnhap, $ngaysinh, $target_file, $email, $sdt, $diachi, $vaitro, $luong, $id_ceo);
+               addnv($hoten, $tendangnhap, $ngaysinh, $target_file, $email, $sdt, $diachi, $vaitro, floatval($luong));
                header('location: ?act=quanlynhanvien');
             }
             // $listnv = listnv();
@@ -286,33 +283,50 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['ceo'])) {
             include('qlnv/addnv.php');
             break;
          case 'modalnv':
-            if (isset($_GET['id_nv'])) {
-               $nhanvien = getone_nv($_GET['id_nv']);
-            }
+    
+            $nhanvien = getone_nv($_GET['id_nv']);
+           
+            
             if (isset($_POST['btn'])) {
+           
+               if ($_FILES['hinhanhnv']['name']=='') {
                $hoten = $_POST['hoten'];
                $tendangnhap = $_POST['tendangnhap'];
                $ngaysinh = $_POST['ngaysinh'];
-
-
-               $target_dir = "../upload-img/";
-               $image = $_FILES['hinhanhnv']['name'];
-               $random = rand(1, 100000);
-               $target_file = $target_dir . $random . $image;
-               move_uploaded_file($_FILES['hinhanhnv']['tmp_name'], $target_file);
-
-
-
+   
                $email = $_POST['email'];
                $sdt = $_POST['sdt'];
                $diachi = $_POST['diachi'];
                $vaitro = $_POST['vaitro'];
                $luong = $_POST['luong'];
-               $id_ceo = $_POST['id_ceo'];
+               
                $id_nv = $_POST['id_nv'];
-               modalnv($hoten, $tendangnhap, $ngaysinh, $target_file, $email, $sdt, $diachi, $vaitro, $luong, $id_ceo, $id_nv);
+               modalnv($hoten, $tendangnhap, $ngaysinh, $nhanvien['hinhanhnv'], $email, $sdt, $diachi, $vaitro, $luong, $id_nv);
 
                header('location: ?act=quanlynhanvien');
+                 
+               }else{
+                  unlink($nhanvien['hinhanhnv']);
+                  $hoten = $_POST['hoten'];
+                  $tendangnhap = $_POST['tendangnhap'];
+                  $ngaysinh = $_POST['ngaysinh'];
+                  $target_dir = "upload_img/";
+                  $image = $_FILES['hinhanhnv']['name'];
+                  $random = rand(1, 100000);
+                  $target_file = $target_dir . $random . $image;
+                  move_uploaded_file($_FILES['hinhanhnv']['tmp_name'], $target_file);
+                  $email = $_POST['email'];
+                  $sdt = $_POST['sdt'];
+                  $diachi = $_POST['diachi'];
+                  $vaitro = $_POST['vaitro'];
+                  $luong = $_POST['luong'];
+                  
+                  $id_nv = $_POST['id_nv'];
+                  modalnv($hoten, $tendangnhap, $ngaysinh,$target_file , $email, $sdt, $diachi, $vaitro, $luong, $id_nv);
+   
+                  header('location: ?act=quanlynhanvien');
+               }
+              
             }
             include('qlnv/modal.php');
             break;
@@ -321,18 +335,21 @@ if (!isset($_SESSION['user']) || !isset($_SESSION['ceo'])) {
                deletenv($_GET['id_nv']);
                header('location: ?act=quanlynhanvien');
             }
-            $listnv = listnv();
-            include('qlnv/main.php');
+            
             break;
          case 'quanlykhachhang':
             $listkh = listkh();
-            var_dump($listkh);
+            // var_dump($listkh);
             include('qlkh/main.php');
             break;
          case 'deletekh':
+            if (isset($_GET['id_kh'])) {
+             deletekh($_GET['id_kh']);
+               header('location: ?act=quanlykhachhang');
+            }
             break;
       }
-      include('footer.php');
+      // include('footer.php');
    } else {
       include('trangchu/main.php');
       include('trangchu/footer.php');

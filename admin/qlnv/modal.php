@@ -18,29 +18,24 @@
             </div>
 
           </div>
-          <form class="row" action="?act=modalnv" method="post" enctype="multipart/form-data">
-         <input type="hidden" name="id_nv" value="<?php echo $nhanvien['id_nv']; ?>">
+          <form class="row" action="?act=modalnv&id_nv=<?=$nhanvien['id_nv']?>" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id_nv" value="<?php echo $nhanvien['id_nv']; ?>">
             <div class="form-group col-md-4">
               <label class="control-label">Họ và tên</label>
-              <input class="form-control" value="<?php echo $nhanvien['hoten']; ?>"  type="text" name="hoten" required>
+              <input class="form-control" value="<?php echo $nhanvien['hoten']; ?>" type="text" name="hoten" required>
             </div>
-            <div class="form-group col-md-4"> 
+            <div class="form-group col-md-4">
               <label class="control-label">Ngày sinh</label>
               <input class="form-control" value="<?php echo $nhanvien['ngaysinh']; ?>" type="text" name="ngaysinh" required>
             </div>
-            <div class="form-group col-md-4"> 
+            <div class="form-group col-md-4">
               <label class="control-label">Ảnh nhân viên</label>
-             <!--  <img name="hinhanhnv" style="width: 75px;" src="" alt=""> -->
-             <?php if($nhanvien['hinh_anhnv'] != null && $nhanvien['hinh_anhnv'] != ""): ?>
-              <?php 
-                var_dump($nhanvien);
-                // die;
-                ?>
-            <img width="75px" src="<?php echo $nhanvien['hinh_anhnv']; ?>" alt="">
-              <?php endif ?>
-             <input type="file" name="hinhanhnv" value="" readonly>
+
+              <img width="75px" src="<?php echo $nhanvien['hinhanhnv']; ?>" alt="">
+
+              <input type="file" name="hinhanhnv" value="" readonly>
             </div>
-            <div class="form-group col-md-4"> 
+            <div class="form-group col-md-4">
               <label class="control-label">Tên đăng nhập</label>
               <input class="form-control" value="<?php echo $nhanvien['tendangnhap']; ?>" type="text" name="tendangnhap" required>
             </div>
@@ -61,19 +56,12 @@
               <label class="control-label">Vai trò</label>
               <input class="form-control" value="<?php echo $nhanvien['vaitro']; ?>" type="text" name="vaitro" required>
             </div>
-           
+
             <div class="form-group  col-md-3">
               <label class="control-label">Lương</label>
-              <input class="form-control" value="<?php echo $nhanvien['luong']; ?>" type="text"  name="luong" required>
+              <input class="form-control" value="<?php echo $nhanvien['luong']; ?>" type="text" name="luong" required>
             </div>
-            <div class="form-group  col-md-3">
-              <label for="exampleSelect1" class="control-label">ID SEO</label>
-              <select class="form-control" id="exampleSelect1" name="id_ceo">
-                <?php foreach ($ceo as $item) : ?>
-                  <option value="<?php echo $item['id_ceo'] ?>"><?php echo $item['hoten'] ?></option>
-                <?php endforeach ?>
-              </select>
-            </div>
+
 
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th10 08, 2023 lúc 03:13 PM
+-- Thời gian đã tạo: Th10 13, 2023 lúc 08:56 AM
 -- Phiên bản máy phục vụ: 10.4.28-MariaDB
 -- Phiên bản PHP: 8.2.4
 
@@ -35,37 +35,6 @@ CREATE TABLE `binhluan` (
   `idspct` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Đang đổ dữ liệu cho bảng `binhluan`
---
-
-INSERT INTO `binhluan` (`id_bl`, `noidung`, `thoigian`, `idkh`, `idspct`) VALUES
-(1, 'Đẹp', '0000-00-00', 1, 1);
-
--- --------------------------------------------------------
-
---
--- Cấu trúc bảng cho bảng `ceo`
---
-
-CREATE TABLE `ceo` (
-  `id_ceo` int(11) NOT NULL,
-  `hoten` varchar(50) NOT NULL,
-  `tendn` varchar(50) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `sdt` varchar(10) NOT NULL,
-  `diachi` varchar(50) NOT NULL,
-  `vaitro` varchar(50) NOT NULL,
-  `matkhau` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `ceo`
---
-
-INSERT INTO `ceo` (`id_ceo`, `hoten`, `tendn`, `email`, `sdt`, `diachi`, `vaitro`, `matkhau`) VALUES
-(1, 'Nguyễn Thi Minh Nguyệt', 'nguyetntm', 'nguyetntm', '', '', '', '12345');
-
 -- --------------------------------------------------------
 
 --
@@ -82,14 +51,6 @@ CREATE TABLE `chitietdonhang` (
   `idspct` int(11) NOT NULL,
   `idmagiamgia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `chitietdonhang`
---
-
-INSERT INTO `chitietdonhang` (`id_chitietdh`, `soluongchitiet`, `giasp`, `tongtien`, `soluong`, `iddh`, `idspct`, `idmagiamgia`) VALUES
-(1, 12, 23500000, 117500000, 5, 1, 1, 1),
-(2, 0, 0, 0, 6, 2, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -111,12 +72,12 @@ INSERT INTO `chitietsize` (`id_chitietsize`, `idsize`, `bankinh`) VALUES
 (1, 1, '10-15cm'),
 (2, 1, '15-20cm'),
 (3, 1, '20-25cm'),
-(4, 2, '30-40cm'),
-(5, 2, '40-50cm'),
-(6, 2, '50-60cm'),
-(7, 3, '60-70cm'),
-(8, 3, '70-80cm'),
-(9, 3, '80-85cm');
+(4, 2, '30-35cm'),
+(5, 2, '35-40cm'),
+(6, 2, '40-45cm'),
+(7, 3, '50-55cm'),
+(8, 3, '55-60cm'),
+(9, 3, '60-65cm');
 
 -- --------------------------------------------------------
 
@@ -126,18 +87,18 @@ INSERT INTO `chitietsize` (`id_chitietsize`, `idsize`, `bankinh`) VALUES
 
 CREATE TABLE `danh_muc` (
   `id_dm` int(11) NOT NULL,
-  `tendm` varchar(50) NOT NULL
+  `tendm` varchar(50) NOT NULL,
+  `hinhanh` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `danh_muc`
 --
 
-INSERT INTO `danh_muc` (`id_dm`, `tendm`) VALUES
-(1, 'Trang Sức Vàng'),
-(2, 'Trang Sức Kim Cương'),
-(5, 'Trang Sức Đá Quý'),
-(13, 'quần áo');
+INSERT INTO `danh_muc` (`id_dm`, `tendm`, `hinhanh`) VALUES
+(1, 'Trang Sức Vàng', ''),
+(2, 'Trang Sức Kim Cương', ''),
+(5, 'Trang Sức Đá Quý', '');
 
 -- --------------------------------------------------------
 
@@ -152,14 +113,6 @@ CREATE TABLE `donhang` (
   `phuongthuctt` varchar(50) NOT NULL,
   `idkh` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Đang đổ dữ liệu cho bảng `donhang`
---
-
-INSERT INTO `donhang` (`id_dh`, `diachinhan`, `sodienthoai`, `phuongthuctt`, `idkh`) VALUES
-(1, 'Hà Nội', '', '', 1),
-(2, 'Hòa Bình', '098765431', 'Tiền mặt', 1);
 
 -- --------------------------------------------------------
 
@@ -223,8 +176,8 @@ CREATE TABLE `khachhang` (
 --
 
 INSERT INTO `khachhang` (`id_kh`, `tenkh`, `email`, `sodienthoai`, `diachi`, `matkhau`, `ngaysinh`, `tentk`) VALUES
-(1, 'Nguyễn Văn A', '', '', '', '', '0000-00-00', ''),
-(2, 'Nguyễn Văn B', '', '', '', '', '0000-00-00', '');
+(1, 'Nguyễn Văn A', '', '', '', '', '2002-11-12', ''),
+(2, 'Nguyễn Văn B', '', '', '', '', '2003-11-12', '');
 
 -- --------------------------------------------------------
 
@@ -235,23 +188,26 @@ INSERT INTO `khachhang` (`id_kh`, `tenkh`, `email`, `sodienthoai`, `diachi`, `ma
 CREATE TABLE `nhanvien` (
   `id_nv` int(11) NOT NULL,
   `hoten` varchar(50) NOT NULL,
-  `hinh_anhnv` varchar(250) NOT NULL,
   `tendangnhap` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `sdt` varchar(11) NOT NULL,
-  `diachi` varchar(200) NOT NULL,
+  `sdt` varchar(10) NOT NULL,
+  `diachi` varchar(50) NOT NULL,
   `vaitro` varchar(50) NOT NULL,
-  `matkhau` varchar(20) NOT NULL,
-  `id_ceo` int(11) NOT NULL
+  `matkhau` varchar(50) NOT NULL,
+  `role` int(11) NOT NULL,
+  `hinhanhnv` varchar(255) NOT NULL,
+  `ngaysinh` date DEFAULT NULL,
+  `luong` float NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `nhanvien`
 --
 
-INSERT INTO `nhanvien` (`id_nv`, `hoten`, `hinh_anhnv`, `tendangnhap`, `email`, `sdt`, `diachi`, `vaitro`, `matkhau`, `id_ceo`) VALUES
-(3, 'Nguyễn Công Trang', '', 'trangnc', 'trangncph44249@fpt.edu.vn', '', '', '', '1234', 1),
-(4, 'Nguyễn Tiến Dũng', '', '', '', '', '', '', '', 1);
+INSERT INTO `nhanvien` (`id_nv`, `hoten`, `tendangnhap`, `email`, `sdt`, `diachi`, `vaitro`, `matkhau`, `role`, `hinhanhnv`, `ngaysinh`, `luong`) VALUES
+(1, 'Nguyễn Thi Minh Nguyệt', 'nguyetntm', 'nguyetntm@fpt.edu.vn', '', '', '', 'ceo1234', 2, '', NULL, 0),
+(2, 'Nguyễn công trang', 'trangnc', '', '', '', 'nhân viên', 'nv1234', 1, '', NULL, 0),
+(3, 'Nguyễn Tiến Dũng', 'dungnt', '', '', '', '', 'nv1234', 1, '', NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -274,9 +230,9 @@ CREATE TABLE `sanphamct` (
 --
 
 INSERT INTO `sanphamct` (`id_spct`, `soluong`, `gia`, `mota`, `tenspchitiet`, `hinhanhchitiet`, `idsp`) VALUES
-(1, 120, 23500000, 'Đẹp', 'Nhẫn Trơn', 'upload_img/1699324595mg1.jpg', 1),
-(2, 120, 21000000, 'Đẹp', 'Nhẫn Bóng', '', 1),
-(6, 0, 1000, '', 'bạc', 'upload_img/1699324793lt2.jpg', 1);
+(14, 12, 23709000, '', 'Nhẫn Vàng Trơn', 'upload_img/1699861582banner nhancuoi.jfif', 1),
+(15, 12, 123457000, '', 'Vòng Vàng ý', 'upload_img/1699861630bong-tai-kim-cuong-loc-phuuc-essenza.jpg', 2),
+(16, 0, 0, '', 'Vòng chân', 'upload_img/1699861665K1B-LPW0014R-YG-W-hover.jpg', 3);
 
 -- --------------------------------------------------------
 
@@ -291,21 +247,18 @@ CREATE TABLE `san_pham` (
   `luotxem` int(11) NOT NULL,
   `dacbiet` varchar(50) NOT NULL,
   `id_dm` int(11) NOT NULL,
-  `id_gt` int(11) NOT NULL
+  `id_gt` int(11) NOT NULL,
+  `id_size` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `san_pham`
 --
 
-INSERT INTO `san_pham` (`id_sp`, `tensp`, `hinhanh`, `luotxem`, `dacbiet`, `id_dm`, `id_gt`) VALUES
-(1, 'Nhẫn Vàng', '', 12, 'Còn Hàng', 1, 3),
-(2, 'Vòng Tay Vàng', '', 123, 'Còn Hàng', 1, 3),
-(3, 'Vòng Cổ Vàng', '', 140, 'Còn Hàng', 1, 3),
-(4, 'Lắc Chân Vàng', '', 120, 'Còn Hàng', 1, 2),
-(5, 'Nhẫn Kim Cương', '', 120, 'Còn Hàng', 2, 3),
-(6, 'Nhẫn Mặt Đá Quý', '', 209, 'Còn Hàng', 5, 3),
-(10, 'iphone', 'upload_img/1699278401ms2.jpg', 120, 'còn hàng', 13, 3);
+INSERT INTO `san_pham` (`id_sp`, `tensp`, `hinhanh`, `luotxem`, `dacbiet`, `id_dm`, `id_gt`, `id_size`) VALUES
+(1, 'Nhẫn Vàng', '', 124, 'Còn Hàng', 1, 3, 1),
+(2, 'Vòng Vàng', '', 120, 'Còn Hàng', 1, 3, 2),
+(3, 'Vòng Chân Vàng', '', 140, 'Còn Hàng', 1, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -315,17 +268,17 @@ INSERT INTO `san_pham` (`id_sp`, `tensp`, `hinhanh`, `luotxem`, `dacbiet`, `id_d
 
 CREATE TABLE `size` (
   `id_size` int(11) NOT NULL,
-  `id_sp` int(11) NOT NULL
+  `tensptheosize` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `size`
 --
 
-INSERT INTO `size` (`id_size`, `id_sp`) VALUES
-(1, 1),
-(2, 2),
-(3, 4);
+INSERT INTO `size` (`id_size`, `tensptheosize`) VALUES
+(1, 'size theo nhẫn vàng'),
+(2, 'size theo vòng tay vàng'),
+(3, 'size theo lắc chân vàng');
 
 --
 -- Chỉ mục cho các bảng đã đổ
@@ -338,12 +291,6 @@ ALTER TABLE `binhluan`
   ADD PRIMARY KEY (`id_bl`),
   ADD KEY `idkh` (`idkh`,`idspct`),
   ADD KEY `idspct` (`idspct`);
-
---
--- Chỉ mục cho bảng `ceo`
---
-ALTER TABLE `ceo`
-  ADD PRIMARY KEY (`id_ceo`);
 
 --
 -- Chỉ mục cho bảng `chitietdonhang`
@@ -396,8 +343,7 @@ ALTER TABLE `khachhang`
 -- Chỉ mục cho bảng `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  ADD PRIMARY KEY (`id_nv`),
-  ADD KEY `id_ceo` (`id_ceo`);
+  ADD PRIMARY KEY (`id_nv`);
 
 --
 -- Chỉ mục cho bảng `sanphamct`
@@ -412,14 +358,14 @@ ALTER TABLE `sanphamct`
 ALTER TABLE `san_pham`
   ADD PRIMARY KEY (`id_sp`),
   ADD KEY `id_dm` (`id_dm`),
-  ADD KEY `id_gt` (`id_gt`);
+  ADD KEY `id_gt` (`id_gt`),
+  ADD KEY `id_size` (`id_size`);
 
 --
 -- Chỉ mục cho bảng `size`
 --
 ALTER TABLE `size`
-  ADD PRIMARY KEY (`id_size`),
-  ADD KEY `id_sp` (`id_sp`);
+  ADD PRIMARY KEY (`id_size`);
 
 --
 -- AUTO_INCREMENT cho các bảng đã đổ
@@ -430,12 +376,6 @@ ALTER TABLE `size`
 --
 ALTER TABLE `binhluan`
   MODIFY `id_bl` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT cho bảng `ceo`
---
-ALTER TABLE `ceo`
-  MODIFY `id_ceo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT cho bảng `chitietdonhang`
@@ -477,19 +417,19 @@ ALTER TABLE `gioitinh`
 -- AUTO_INCREMENT cho bảng `nhanvien`
 --
 ALTER TABLE `nhanvien`
-  MODIFY `id_nv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_nv` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT cho bảng `sanphamct`
 --
 ALTER TABLE `sanphamct`
-  MODIFY `id_spct` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_spct` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT cho bảng `san_pham`
 --
 ALTER TABLE `san_pham`
-  MODIFY `id_sp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_sp` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT cho bảng `size`
@@ -529,12 +469,6 @@ ALTER TABLE `donhang`
   ADD CONSTRAINT `donhang_ibfk_1` FOREIGN KEY (`idkh`) REFERENCES `khachhang` (`id_kh`);
 
 --
--- Các ràng buộc cho bảng `nhanvien`
---
-ALTER TABLE `nhanvien`
-  ADD CONSTRAINT `nhanvien_ibfk_1` FOREIGN KEY (`id_ceo`) REFERENCES `ceo` (`id_ceo`);
-
---
 -- Các ràng buộc cho bảng `sanphamct`
 --
 ALTER TABLE `sanphamct`
@@ -545,13 +479,8 @@ ALTER TABLE `sanphamct`
 --
 ALTER TABLE `san_pham`
   ADD CONSTRAINT `san_pham_ibfk_1` FOREIGN KEY (`id_dm`) REFERENCES `danh_muc` (`id_dm`),
-  ADD CONSTRAINT `san_pham_ibfk_2` FOREIGN KEY (`id_gt`) REFERENCES `gioitinh` (`id_gt`);
-
---
--- Các ràng buộc cho bảng `size`
---
-ALTER TABLE `size`
-  ADD CONSTRAINT `size_ibfk_1` FOREIGN KEY (`id_sp`) REFERENCES `san_pham` (`id_sp`);
+  ADD CONSTRAINT `san_pham_ibfk_2` FOREIGN KEY (`id_gt`) REFERENCES `gioitinh` (`id_gt`),
+  ADD CONSTRAINT `san_pham_ibfk_3` FOREIGN KEY (`id_size`) REFERENCES `size` (`id_size`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

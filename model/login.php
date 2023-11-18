@@ -1,12 +1,9 @@
 <?php 
 function nhanvien(){
-    $sql="SELECT * FROM `nhanvien`";
+    $sql="SELECT * FROM  nhanvien";
     return pdo_query($sql);
 }
-function admin(){
-    $sql="SELECT * FROM `ceo`";
-    return pdo_query($sql);
-}
+
 function updatemk($id,$matkhau){
 $sql="UPDATE `nhanvien` SET `matkhau`='$matkhau' WHERE id_nv=$id";
 pdo_execute($sql);

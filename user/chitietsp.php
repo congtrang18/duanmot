@@ -1,5 +1,5 @@
 <body>
-    <div class="detail-product-main mt-5">
+    <div class="detail-product-main">
 
         <div class="container">
             <div class="row">

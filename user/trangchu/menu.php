@@ -1,27 +1,26 @@
+<?php
+$iddm = getiddm();
+var_dump($iddm);
+?>
 <header>
+
   <div class="title">
     <div class="container">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="header-link-icon mt-3">
-            <a href=""> <i class="p-2  ti-facebook"></i></a>
-            <a href=""> <i class="p-2  ti-instagram"></i></a>
-            <a href=""> <i class="p-2  ti-youtube"></i></a>
-            <a href=""> <i class="p-2  ti-location-pin"></i></a>
-          </div>
+      <div class="row m-3">
+        <div class="col-md-2">
+         <!-- logo -->
         </div>
-        <div class="col-md-4">
-          <img src="img/logoJN.png"  class="w-50" alt="">
-        </div>
-        <div class="col-md-4">
-          <div class="row p-3">
-            <div class="col-md-8">
-              <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+        <div class="col-md-9">
+        <form class="d-flex" role="search">
+                <input class="form-control me-1" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-success text-bg-secondary" type="submit">Search</button>
               </form>
-            </div>
-            <div class="col-md-2">
+        </div>
+
+        <div class="col-md-1">
+          <div class="row ">
+           
+            <div class="col-md-8">
               <a href="?act=giohang">
                 <button type="button" class="btn btn-primary position-relative">
                   <i class="ti-shopping-cart"></i>
@@ -32,14 +31,36 @@
                 </button>
               </a>
             </div>
-            <div class="col-md-2">
-              <a href="">
-                <button type="button" class="btn btn-primary position-relative">
-                  <i class="ti-user"></i>
 
-                </button>
-              </a>
-            </div>
+            <?php if (isset($_SESSION['emailkh'])) { ?>
+              <div class="col-md-6 btn-user">
+                <a href="">
+                  <button type="button" class="btn btn-primary position-relative">
+                    <?= $_SESSION['emailkh']  ?>
+                  </button>
+                  <div class="account">
+                    <a href="?act=dangxuat">đăng xuất</a>
+
+                  </div>
+                </a>
+
+              </div>
+            <?php } else { ?>
+              <div class="col-md-4 btn-user">
+                <a href="">
+                  <button type="button" class="btn btn-primary position-relative">
+                    <i class="ti-user">
+                    </i>
+                  </button>
+                  <div class="account">
+                    <li><a href="?act=dangnhap">đăng nhập</a></li>
+                    <li><a href="?act=dangky">đăng ký</a></li>
+                  </div>
+                </a>
+
+              </div>
+            <?php } ?>
+
           </div>
 
         </div>
@@ -54,12 +75,12 @@
           <div class="nav menu-destop">
             <ul class="d-flex justify-content-sm-between">
               <li><a href="?act=trangchu">TRANG CHỦ</a></li>
-              <li class="drop-down"><a href="?act=trangsucvang">TRANG SỨC VÀNG <i class="ti-angle-down"></i></a>
+              <li class="drop-down"><a href="?act=trangsucvang&iddm=<?= $iddm[1]['id_dm'] ?>">TRANG SỨC VÀNG <i class="ti-angle-down"></i></a>
                 <div class="menu-sub-gold">
                   <ul class="mega-menu d-flex justify-content-evenly">
-                    <li class="mega-title"><a href="#"><span>Trang sức kim cương</span></a>
+                    <li class="mega-title"><a href="?act=trangsuckimcuong&iddm=<?= $iddm[2]['id_dm'] ?>"><span>TRANG SÚC KIM CƯƠNG</span></a>
                       <ul class="menu-item">
-                        <li><a href="#">Nhẫn kim cương</a>
+                        <li><a href="">Nhẫn kim cương</a>
 
                         </li>
                         <li><a href="#">Bông tai kim cương</a></li>
@@ -78,7 +99,7 @@
                         <li><a href="#">Vòng Pan-Charm</a></li>
                       </ul>
                     </li>
-                    <li class="mega-title"><a href="#"><span>Trang sức đá màu</span></a>
+                    <li class="mega-title"><a href=""><span>Trang sức đá màu</span></a>
                       <ul class="menu-item">
                         <li><a href="#">Nhẫn đá màu</a></li>
                         <li><a href="#">Bông tai đá màu</a></li>
@@ -107,7 +128,7 @@
                   </ul>
                 </div>
               </li>
-              <li class="drop-down"><a href="#">TRANG SỨC CƯỚI <i class="ti-angle-down"></i></a>
+              <li class="drop-down"><a href="?act=trangsuckimcuong&iddm=<?= $iddm[2]['id_dm'] ?>">TRANG SỨC KIM CƯƠNG<i class="ti-angle-down"></i></a>
                 <ul class="menu-sub dropdown">
                   <li class="drop-down"><a href="#">Nhẫn cưới</a>
                     <ul class="dropdown menu-sub-child">
@@ -125,7 +146,7 @@
                   <li><a href="#">Kiềng cưới</a></li>
                 </ul>
               </li>
-              <li class="drop-down"><a href="#">TRANG SỨC CAO CẤP <i class="ti-angle-down"></i></a>
+              <li class="drop-down"><a href="?act=trangsucngoctrai&iddm=<?= $iddm[3]['id_dm'] ?>">TRANG SỨC NGỌC TRAI <i class="ti-angle-down"></i></a>
                 <ul class="menu-sub dropdown">
                   <li class="drop-down"><a href="#">Nhẫn</a>
                   </li>
@@ -135,8 +156,11 @@
                   <li><a href="#">Vòng & Lắc</a></li>
                 </ul>
               </li>
-              <li><a href="#">KIM CƯƠNG</a></li>
-              <li><a href="#">BỘ SƯU TẬP</a></li>
+              <li><a href="#">BẠC</a></li>
+              <?php if (isset($_SESSION['emailkh'])) { ?>
+                <li><a href="?act=suatk">Quản lý tài khoản</a></li>
+
+              <?php } ?>
               <li><a href="?act=tintuc">TIN TỨC</a></li>
               <li><a href="?act=lienhe">LIÊN HỆ</a></li>
             </ul>
@@ -148,7 +172,7 @@
   </div>
 
 
-  <div class="title-mobile">
+  <!-- <div class="title-mobile">
     <div class="container">
       <div class="row">
         <div class="col-md-4">
@@ -170,15 +194,15 @@
               </form>
             </div>
             <div class="col-md-2">
-              
-                <button type="button" class="btn btn-primary position-relative">
-                  <i class="ti-shopping-cart"></i>
-                  <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    99+
-                    <span class="visually-hidden">unread messages</span>
-                  </span>
-                </button>
-              
+
+              <button type="button" class="btn btn-primary position-relative">
+                <i class="ti-shopping-cart"></i>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                  99+
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+              </button>
+
             </div>
             <div class="col-md-2">
               <button type="button" class="btn btn-primary position-relative">
@@ -301,6 +325,6 @@
       </div>
 
     </div>
-  </div>
+  </div> -->
 
 </header>
